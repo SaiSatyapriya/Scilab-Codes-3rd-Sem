@@ -1,0 +1,14 @@
+clc;clear;clf;
+x=[9.63,9.78,9.98,9.53,9.91,10.05,9.34,9.89,10.08,9.79,9.74,9.94,9.82,9.84];
+N=length(x);
+mean_data=mean(x);
+
+var_data=0;
+for i=1:N
+    var_data = var_data+(x(i)-mean_data)^2
+end
+
+sigma_sq=var_data/N;
+sigma=sqrt(sigma_sq);
+printf("The central data is "+string(mean_data));
+printf("\n The standard deviation is "+string(sigma));
