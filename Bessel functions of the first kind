@@ -1,0 +1,20 @@
+// Q. Plot some Bessel functions of the first kind
+
+clc;              // Clears the command window
+clf;              // Clears the current graphics figure
+
+x = linspace(0,40,5000)';  
+// Generates 5000 equally spaced points from 0 to 40
+// The apostrophe (') converts the row vector into a column vector
+
+plot2d(x, besselj(0:4, x), style=2:6, leg="J0@J1@J2@J3@J4");
+// Computes and plots Bessel functions J0(x) to J4(x)
+// style=2:6 assigns different colors/line styles
+// leg defines legend entries separated by '@'
+
+legend('J_' + string(0:4), 1);
+// Displays legend as J_0, J_1, J_2, J_3, J_4
+// '1' places the legend automatically on the plot
+
+xtitle("Some Bessel functions of the first kind");
+// Adds a title to the graph
