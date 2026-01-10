@@ -1,0 +1,41 @@
+// Q. Check the recursion relation for Bessel functions:
+// x J_{n+1}(x) = 2n J_n(x) − x J_{n−1}(x)
+
+clc;              
+// Clears the command window
+
+funcprot(0);      
+// Disables function redefinition warnings
+
+n = 1;            
+// Defines the order n of the Bessel function
+
+// n = input("Enter value of n: ");  
+// (Optional) Takes n as user input instead of fixing it
+
+for x = 0:0.01:10
+    // Loop variable x varies from 0 to 10 in steps of 0.01
+
+    p = x * besselj(n+1, x);  
+    // Computes the Left-Hand Side (LHS): x J_{n+1}(x)
+
+    q = 2*n*besselj(n, x) - x*besselj(n-1, x);  
+    // Computes the Right-Hand Side (RHS): 2n J_n(x) − x J_{n−1}(x)
+
+    if p == q then
+        // Checks if LHS and RHS are exactly equal
+        // (Exact equality usually fails due to numerical precision)
+
+        // disp("The recursion relation is satisfied")
+
+    elseif abs(p - q) < 0.000001 then
+        // Checks if LHS and RHS are approximately equal
+        // Tolerance is set to 10^(-6)
+
+        // disp("The recursion relation is satisfied")
+
+    else
+        // Executes if the recursion relation is not satisfied
+        disp("The recursion relation fails by " + string(p - q));
+    end
+end
