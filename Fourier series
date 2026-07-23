@@ -1,7 +1,9 @@
-funcprot(0); clc; clf; clear;
+funcprot(0);
+clc;
+clf;
+clear;
 
-// Here L is HALF the period (interval [-L, L] has length 2L)
-L = int(input("Enter HALF the period L: "));    
+L = int(input("Enter HALF the period L: "));
 n = int(input("Enter the number of terms required: "));
 
 function y = f(x)
@@ -9,28 +11,35 @@ function y = f(x)
 endfunction
 
 a0 = 1/L * intg(-L, L, f, 1e-2);
-disp("The value of a0 = ",a0);
+disp("The value of a0 = ", a0);
 
 for i = 1:n
     function ya = fa(x)
         ya = f(x) .* cos(i*%pi*x/L);
     endfunction
+
     a(i) = 1/L * intg(-L, L, fa, 1e-2);
-disp("The value of an = ",a(i));
-    function yb=fb(x)
-        yb= f(x)*sin(i*%pi*x/L);
+    disp("The value of an = ", a(i));
+
+    function yb = fb(x)
+        yb = f(x) .* sin(i*%pi*x/L);
     endfunction
-    b(i)=1/L*intg(-L,L,fb,1e-2);
-disp("The value of bn = ",b(i));
+
+    b(i) = 1/L * intg(-L, L, fb, 1e-2);
+    disp("The value of bn = ", b(i));
 end
 
-fourierseries=0; // If the sum is not initialized to 0, it will keep old values from memory and give an incorrect result.
-function yf=fs(x) //expresses the fourier series as a function
-    for i=1:n
-        fourierseries = fourierseries + a(i)*cos(i*%pi*x/L) + b(i)*sin(i*%pi*x/L)
+fourierseries = 0;
+
+function yf = fs(x)
+    fourierseries = 0;
+    for i = 1:n
+        fourierseries = fourierseries + a(i)*cos(i*%pi*x/L) + b(i)*sin(i*%pi*x/L);
     end
-    yf = a0/2 + fourierseries
+    yf = a0/2 + fourierseries;
 endfunction
-h=0.01; //step size
-y=-L:h:L; //array of points to plot
-plot2d(y,fs(y));
+
+h = 0.01;
+y = -L:h:L;
+
+plot2d(y, fs(y));
